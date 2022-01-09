@@ -245,58 +245,23 @@ namespace ParallelSyscalls
             public uint TimeDateStamp;
         }
 
-        [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct _TEB
+        [StructLayout(LayoutKind.Explicit, Size = 64)]
+        public struct _PEB
         {
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12)]
-            public IntPtr[] Reserved1;
-            public IntPtr ProcessEnvironmentBlock;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 399)]
-            public IntPtr[] Reserved2;
-            public fixed byte Reserved3[1952];
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 64)]
-            public IntPtr[] TlsSlots;
-            public fixed byte Reserved4[8];
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 26)]
-            public IntPtr[] Reserved5;
-            public IntPtr ReservedForOle;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-            public IntPtr[] Reserved6;
-            public IntPtr TlsExpansionSlots;
+            [FieldOffset(12)]
+            public IntPtr Ldr32;
+            [FieldOffset(16)]
+            public IntPtr ProcessParameters32;
+            [FieldOffset(24)]
+            public IntPtr Ldr64;
+            [FieldOffset(28)]
+            public IntPtr FastPebLock32;
+            [FieldOffset(32)]
+            public IntPtr ProcessParameters64;
+            [FieldOffset(56)]
+            public IntPtr FastPebLock64;
+        }
 
-            public static _TEB Create(IntPtr tebAddress)
-            {
-                _TEB teb = (_TEB)Marshal.PtrToStructure(tebAddress, typeof(_TEB));
-                return teb;
-            }
-        }
-        [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct _PEB
-        {
-            public fixed byte Reserved1[2];
-            public byte BeingDebugged;
-            public fixed byte Reserved2[1];
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-            public IntPtr[] Reserved3;
-            public IntPtr Ldr;
-            public IntPtr ProcessParameters;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-            public IntPtr[] Reserved4;
-            public IntPtr AtlThunkSListPtr;
-            public IntPtr Reserved5;
-            public uint Reserved6;
-            public IntPtr Reserved7;
-            public uint Reserved8;
-            public uint AtlThunkSListPtr32;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 45)]
-            public IntPtr[] Reserved9;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 96)]
-            public byte[] Reserved10;
-            public IntPtr PostProcessInitRoutine;
-            public fixed byte Reserved11[128];
-            public IntPtr Reserved12;
-            public uint SessionId;
-        }
         [StructLayout(LayoutKind.Sequential)]
         public struct UNICODE_STRING
         {
@@ -334,7 +299,7 @@ namespace ParallelSyscalls
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        public unsafe struct IMAGE_SECTION_HEADER
+        public struct IMAGE_SECTION_HEADER
         {
             [FieldOffset(0)]
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
@@ -719,7 +684,7 @@ namespace ParallelSyscalls
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct IMAGE_NT_HEADERS
+        public struct IMAGE_NT_HEADERS
         {
             public int Signature;
             public IMAGE_FILE_HEADER FileHeader;

@@ -35,7 +35,7 @@ namespace ParallelSyscalls
             _PEB Peb = GetPeb();
             LDR_DATA_TABLE_ENTRY NtdllLdrEntry = new LDR_DATA_TABLE_ENTRY();
             
-            IntPtr startLink = Marshal.PtrToStructure<PEB_LDR_DATA>(Peb.Ldr).InLoadOrderModuleList.Flink;
+            IntPtr startLink = Marshal.PtrToStructure<PEB_LDR_DATA>(Peb.Ldr64).InLoadOrderModuleList.Flink;
             LDR_DATA_TABLE_ENTRY LdrEntry = Marshal.PtrToStructure <LDR_DATA_TABLE_ENTRY>(startLink);
 
             while(true)
@@ -186,8 +186,6 @@ namespace ParallelSyscalls
             ObjectAttributes.RootDirectory = IntPtr.Zero;
             ObjectAttributes.SecurityDescriptor = IntPtr.Zero;
             ObjectAttributes.SecurityQualityOfService = IntPtr.Zero;
-
-
 
             //NtOpenFile > NtCreateSection > NtMapViewOfSection
             ntStatus = funcNtOpenFile(

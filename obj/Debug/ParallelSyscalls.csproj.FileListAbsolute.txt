@@ -1,7 +1,0 @@
-C:\Users\cube0x0\source\repos\ParallelSyscalls\bin\Debug\ParallelSyscalls.exe.config
-C:\Users\cube0x0\source\repos\ParallelSyscalls\bin\Debug\ParallelSyscalls.exe
-C:\Users\cube0x0\source\repos\ParallelSyscalls\bin\Debug\ParallelSyscalls.pdb
-C:\Users\cube0x0\source\repos\ParallelSyscalls\obj\Debug\ParallelSyscalls.csproj.AssemblyReference.cache
-C:\Users\cube0x0\source\repos\ParallelSyscalls\obj\Debug\ParallelSyscalls.csproj.CoreCompileInputs.cache
-C:\Users\cube0x0\source\repos\ParallelSyscalls\obj\Debug\ParallelSyscalls.exe
-C:\Users\cube0x0\source\repos\ParallelSyscalls\obj\Debug\ParallelSyscalls.pdb
